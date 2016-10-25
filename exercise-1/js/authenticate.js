@@ -1,16 +1,36 @@
 // JavaScript authentication file
 $(function() {
-
+    var config = {
+    apiKey: "AIzaSyBIvQkQZ6OIWkUBS7-3TutHJ2m6BqIajHI",
+    authDomain: "signinsignup-3ebdb.firebaseapp.com",
+    databaseURL: "https://signinsignup-3ebdb.firebaseio.com",
+    storageBucket: "signinsignup-3ebdb.appspot.com",
+    messagingSenderId: "858941382174"
+    };
+    firebase.initializeApp(config);
     // Initialize Firebase
 
     // Sign Up: Function to create account on firebase, then redirect to index.html
     var signUp = function() {
         // Get email, password, and display name
-
-
+        //give them all variables
+            var dname = $('#dname').val();
+            var email = $('#email').val();
+            var psw = $('#psw').val();
+            console.log(dname, email, psw);
         // Create user, then set the user's display name
 
-                // Set display name
+        firebase.auth().createUserWithEmailAndPassword(email, psw).then(function(user){     
+            user.updateProfile({
+                displayName:dname //set display name to display name
+            }).then(function(){
+                window.location = 'index.html'
+            })
+            //displays error message
+        }).catch(function(error) {
+                alert(error.message);
+
+        }
 
     };
 
@@ -32,7 +52,15 @@ $(function() {
     };
 
     // Assign event lister to form submission
-
+    $('form').on('submit', function(event){
+        event.preventDefault();
+        var formId = $('signup').attr('signup');
+        if (formId == 'signup') {
+            signUp();
+        } else if (formId == 'signin') {
+            signIn();
+        }
+    });
 
 
     // Assign click event to logout button

@@ -10,10 +10,18 @@ $(function() {
 	firebase.initializeApp(config);
 
 	// Initialize your 'users' firebase reference
+	var config = {
+    apiKey: "AIzaSyBIvQkQZ6OIWkUBS7-3TutHJ2m6BqIajHI",
+    authDomain: "signinsignup-3ebdb.firebaseapp.com",
+    databaseURL: "https://signinsignup-3ebdb.firebaseio.com",
+    storageBucket: "signinsignup-3ebdb.appspot.com",
+    messagingSenderId: "858941382174"
+  	};
+  	firebase.initializeApp(config);
 
 	// Checks to see if a user is already signed in and if so redirects
 	// to users.html
-	var user = firebase.auth().currentUser;
+	var user = firebase.auth().currentUser;		//create reference to the authentication object
 	if (user) {
 		window.location = "./views/user.html"
 	}
