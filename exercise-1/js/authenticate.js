@@ -36,8 +36,13 @@ $(function() {
 
     // SignIn: Function to authenticate on Firebase, then redirect to index.html
     var signIn = function() {
+        var email = $('#email').val();
+        var psw = $('#psw').val();
         // Get email and password
-
+        firebase.auth().createUserWithEmailAndPassword(email, psw).then(function(user){  
+            window.location = 'index.html'
+        }) .catch(function(error) {
+                alert(error.message);
 
         // Authenticate using email and password, then redirect
 
